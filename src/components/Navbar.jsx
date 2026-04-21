@@ -7,7 +7,7 @@ import {
   Avatar,
   Menu,
   MenuItem,
-  Divider
+  Divider,
 } from "@mui/material";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -63,6 +63,9 @@ const Navbar = () => {
               <Typography fontWeight="bold">{user?.name}</Typography>
               <Typography variant="body2">{user?.email}</Typography>
             </Box>
+          </MenuItem>
+          <MenuItem onClick={() => navigate("/change-password")}>
+            Change Password
           </MenuItem>
 
           <Divider />

@@ -2,20 +2,27 @@ import { useState } from "react";
 import { TextField, Button, Box, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { login } from "../services/auth";
+import API from "../services/api";
 
 const Login = () => {
   const [form, setForm] = useState({ email: "", password: "" });
   const navigate = useNavigate();
 
-  const handleLogin = () => {
-    const res = login(form.email, form.password);
+const handleLogin = async () => {
+  try {
+    const res = await API.post("/auth/login", {
+      email: form.email.trim(),
+      password: form.password.trim()
+    });
 
-    if (res.success) {
-      navigate("/");
-    } else {
-      alert(res.message);
-    }
-  };
+    // ✅ store logged-in user
+    localStorage.setItem("teacher_user", JSON.stringify(res.data));
+
+    navigate("/");
+  } catch (err) {
+    alert(err.response?.data?.message || "Login failed");
+  }
+};
 
   return (
     <Box sx={{ width: 300, margin: "100px auto" }}>
@@ -38,9 +45,6 @@ const Login = () => {
         Login
       </Button>
 
-      <Button fullWidth onClick={() => navigate("/signup")}>
-        Go to Signup
-      </Button>
     </Box>
   );
 };

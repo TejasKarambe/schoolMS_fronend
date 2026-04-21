@@ -90,6 +90,7 @@ function App() {
                 </ProtectedRoute>
               }
             />
+            <Route path="/change-password" element={<ChangePassword />} />
           </Routes>
         </Box>
       </Box>

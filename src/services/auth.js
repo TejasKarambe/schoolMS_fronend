@@ -10,11 +10,6 @@ export const login = (email, password) => {
   return { success: false, message: "Invalid credentials" };
 };
 
-export const signup = (data) => {
-  localStorage.setItem(USER_KEY, JSON.stringify(data));
-  return { success: true };
-};
-
 export const logout = () => {
   localStorage.removeItem(USER_KEY);
 };

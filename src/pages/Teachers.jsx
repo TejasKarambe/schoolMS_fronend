@@ -25,7 +25,7 @@ const Teachers = () => {
 
   const user = JSON.parse(localStorage.getItem("user"));
 
-  if (user?.role !== "admin") {
+  if (teacher_user?.role !== "admin") {
     return <h2>Access Denied</h2>;
   }
 

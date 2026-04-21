@@ -2,12 +2,12 @@ import { Navigate } from "react-router-dom";
 import { getCurrentUser } from "../services/auth";
 
 const ProtectedRoute = ({ children }) => {
-  const user = getCurrentUser();
-
+  const user = localStorage.getItem("teacher_user");
+  
   if (!user) {
-    return <Navigate to="/login" />;
+    return <Navigate to="/login" replace />;
   }
-
+  
   return children;
 };
 

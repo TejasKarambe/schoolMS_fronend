@@ -27,25 +27,33 @@ const Login = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  const handleLogin = async () => {
-    setError("");
-    setLoading(true);
-    
-    try {
-      const res = await API.post("/auth/login", {
-        email: form.email.trim(),
-        password: form.password.trim()
-      });
+const handleLogin = async () => {
+  setError("");
+  setLoading(true);
+  
+  try {
+    const res = await API.post("/auth/login", {
+      email: form.email.trim(),
+      password: form.password.trim()
+    });
 
-      // store logged-in user
-      localStorage.setItem("teacher_user", JSON.stringify(res.data));
-      navigate("/");
-    } catch (err) {
-      setError(err.response?.data?.message || "Login failed. Please check your credentials.");
-    } finally {
-      setLoading(false);
-    }
-  };
+    console.log("Login response:", res.data); // Debug log
+    
+    // store logged-in user
+    localStorage.setItem("teacher_user", JSON.stringify(res.data));
+    
+    // Verify it was stored
+    const stored = localStorage.getItem("teacher_user");
+    console.log("Stored user:", stored); // Debug log
+    
+    navigate("/");
+  } catch (err) {
+    console.error("Login error:", err); // Debug log
+    setError(err.response?.data?.message || "Login failed. Please check your credentials.");
+  } finally {
+    setLoading(false);
+  }
+};
 
   const handleKeyPress = (e) => {
     if (e.key === 'Enter' && !loading) {

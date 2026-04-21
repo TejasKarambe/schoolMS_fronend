@@ -16,83 +16,86 @@ import ChangePassword from "./components/ChangePassword";
 
 function App() {
   const [searchTerm, setSearchTerm] = useState("");
+  
+  // Check if user is logged in
+  const isAuthenticated = localStorage.getItem("teacher_user") !== null;
 
   return (
     <BrowserRouter>
-      <Box sx={{ display: "flex" }}>
-        <Sidebar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-
-        <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-          <Navbar />
-          <Routes>
-            <Route path="/login" element={<Login />} />
-
-            <Route
-              path="/"
-              element={
-                <ProtectedRoute>
-                  <Dashboard searchTerm={searchTerm} />
-                </ProtectedRoute>
-              }
-            />
-
-            <Route
-              path="/classes"
-              element={
-                <ProtectedRoute>
-                  <Classes searchTerm={searchTerm} />
-                </ProtectedRoute>
-              }
-            />
-
-            <Route
-              path="/students"
-              element={
-                <ProtectedRoute>
-                  <Students searchTerm={searchTerm} />
-                </ProtectedRoute>
-              }
-            />
-
-            <Route
-              path="/teachers"
-              element={
-                <ProtectedRoute>
-                  <Teachers searchTerm={searchTerm} />
-                </ProtectedRoute>
-              }
-            />
-
-            <Route
-              path="/attendance"
-              element={
-                <ProtectedRoute>
-                  <Attendance searchTerm={searchTerm} />
-                </ProtectedRoute>
-              }
-            />
-
-            <Route
-              path="/subjects"
-              element={
-                <ProtectedRoute>
-                  <Subjects searchTerm={searchTerm} />
-                </ProtectedRoute>
-              }
-            />
-
-            <Route
-              path="/timetable"
-              element={
-                <ProtectedRoute>
-                  <Timetable searchTerm={searchTerm} />
-                </ProtectedRoute>
-              }
-            />
-            <Route path="/change-password" element={<ChangePassword />} />
-          </Routes>
+      {isAuthenticated ? (
+        // Authenticated layout with Sidebar and Navbar
+        <Box sx={{ display: "flex" }}>
+          <Sidebar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+          <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+            <Navbar />
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <ProtectedRoute>
+                    <Dashboard searchTerm={searchTerm} />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/classes"
+                element={
+                  <ProtectedRoute>
+                    <Classes searchTerm={searchTerm} />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/students"
+                element={
+                  <ProtectedRoute>
+                    <Students searchTerm={searchTerm} />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/teachers"
+                element={
+                  <ProtectedRoute>
+                    <Teachers searchTerm={searchTerm} />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/attendance"
+                element={
+                  <ProtectedRoute>
+                    <Attendance searchTerm={searchTerm} />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/subjects"
+                element={
+                  <ProtectedRoute>
+                    <Subjects searchTerm={searchTerm} />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/timetable"
+                element={
+                  <ProtectedRoute>
+                    <Timetable searchTerm={searchTerm} />
+                  </ProtectedRoute>
+                }
+              />
+              <Route path="/change-password" element={<ChangePassword />} />
+            </Routes>
+          </Box>
         </Box>
-      </Box>
+      ) : (
+        // Unauthenticated layout (no Sidebar, no Navbar)
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="*" element={<Login />} />
+        </Routes>
+      )}
     </BrowserRouter>
   );
 }

@@ -7,7 +7,7 @@ import {
   TextField,
   Button,
   Typography,
-  IconButton
+  IconButton,
 } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import EditIcon from "@mui/icons-material/Edit";
@@ -23,9 +23,28 @@ const Teachers = () => {
     setTeachers(res.data);
   };
 
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  if (user?.role !== "admin") {
+    return <h2>Access Denied</h2>;
+  }
+
   useEffect(() => {
     fetchData();
   }, []);
+
+  const handleResetPassword = async (id) => {
+    const newPassword = prompt("Enter new password");
+
+    if (!newPassword) return;
+
+    await API.post("/auth/reset-password", {
+      id,
+      newPassword,
+    });
+
+    alert("Password reset successful");
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -68,11 +87,22 @@ const Teachers = () => {
         </>
       ),
     },
+    {
+      field: "reset",
+      headerName: "Reset Password",
+      renderCell: (params) => (
+        <Button onClick={() => handleResetPassword(params.row.id)}>
+          Reset
+        </Button>
+      ),
+    },
   ];
 
   return (
     <Box sx={{ p: 4 }}>
-      <Typography variant="h5" mb={3}>Manage Teachers</Typography>
+      <Typography variant="h5" mb={3}>
+        Manage Teachers
+      </Typography>
 
       <Paper sx={{ p: 3, mb: 3, border: "1px solid grey" }}>
         <Box component="form" onSubmit={handleSubmit}>

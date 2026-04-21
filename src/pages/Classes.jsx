@@ -101,7 +101,7 @@ return (
     </Typography>
 
     {/* Form */}
-    <Paper sx={{ p: 3, mb: 4, border: "1px solid grey", p: 2 }}>
+    <Paper sx={{ p: 3, mb: 4, border: "1px solid grey"}}>
       <Box component="form" onSubmit={handleSubmit} sx={{ '& .MuiTextField-root': { m: 1, width: '25ch' } }}>
         <Grid container spacing={2}>
 

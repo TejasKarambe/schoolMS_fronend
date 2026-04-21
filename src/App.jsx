@@ -11,7 +11,6 @@ import { useState } from "react";
 import { Box } from "@mui/material";
 import Navbar from "./components/Navbar";
 import Login from "./pages/Login";
-import Signup from "./pages/Signup";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
@@ -26,7 +25,6 @@ function App() {
           <Navbar />
           <Routes>
             <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
 
             <Route
               path="/"

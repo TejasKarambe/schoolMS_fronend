@@ -12,6 +12,7 @@ import { Box } from "@mui/material";
 import Navbar from "./components/Navbar";
 import Login from "./pages/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
+import ChangePassword from "./components/ChangePassword";
 
 function App() {
   const [searchTerm, setSearchTerm] = useState("");

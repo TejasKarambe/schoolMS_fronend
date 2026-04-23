@@ -109,7 +109,7 @@ const handleLogin = async () => {
                 mb: 1
               }}
             >
-              School Management System
+              Classroom Management System
             </Typography>
             <Typography variant="body2" color="text.secondary">
               Sign in to access your dashboard
@@ -208,7 +208,7 @@ const handleLogin = async () => {
           {/* Footer */}
           <Box sx={{ mt: 3, textAlign: "center" }}>
             <Typography variant="body2" color="text.secondary">
-              © 2024 School Management System. All rights reserved.
+              © 2024 Classroom Management System. All rights reserved.
             </Typography>
           </Box>
         </Paper>

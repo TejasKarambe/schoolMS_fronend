@@ -44,7 +44,7 @@ const Sidebar = () => {
     >
       <Box sx={{ p: 2, textAlign: "center" }}>
         <SchoolIcon sx={{ fontSize: 50 }} />
-        <Typography variant="h6" sx={{ mt: 1 }}>School Management</Typography>
+        <Typography variant="h6" sx={{ mt: 1 }}>Classroom Management</Typography>
       </Box>
 
       {/* <Box sx={{ p: 2 }}>
